@@ -32,10 +32,14 @@ class Proveedore(models.Model):
 
 class Venta(models.Model):
     idd = models.CharField(max_length = 20)
-    fecha = models.CharField(max_length = 20)
+    fecha = models.DateField()
     montofinal = models.CharField(max_length = 20)
-    descuento = models.CharField(max_length = 20)
+    descuento = models.BooleanField(max_length = 20)
     cliente = models.ForeignKey("Cliente", related_name='+',  on_delete=models.CASCADE,null = False,)
+    def Descue(self):
+        return self.descuento
+    Descue.boolean = descuento
+    Descue.short_description = "Descuento Aplicado"
     def __str__(self):
         return str(self.fecha)
 
@@ -46,6 +50,8 @@ class Cliente(models.Model):
     direccion = models.ForeignKey("Direccion", related_name='+',  on_delete=models.CASCADE,null = False,)
     def __str__(self):
         return str(self.nombre)
+
+    
 
 class Direccion(models.Model):
     calle = models.CharField(max_length = 20)
